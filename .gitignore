@@ -1,27 +1,24 @@
-.settings
-.classpath
-bin
-coverage
-coverage.ec
-coverage.em
-gen
-javadoc
-junit-report.xml
-lint-results.*ml
-lint-results_files
-local.properties
-monkey.txt
-*~
-*.iws
-atlassian-ide-plugin.xml
-target
-build
-.gradle
-out
-build.xml
-proguard-project.txt
-.idea/
+# OSX  Apple
+*.DS_Store
+
+# Gradle files
+build/
+.gradle/
+*/build/
+
+# IDEA
 *.iml
+#.idea/.name
+#.idea/encodings.xml
+#.idea/inspectionProfiles/Project_Default.xml
+#.idea/inspectionProfiles/profiles_settings.xml
+#.idea/misc.xml
+#.idea/modules.xml
+#.idea/scopes/scope_settings.xml
+#.idea/vcs.xml
+#.idea/workspace.xml
+#.idea/libraries
+.idea/
 
 # Built application files
 *.apk
@@ -33,8 +30,30 @@ proguard-project.txt
 # Java class files
 *.class
 
+# Generated files
+/bin
+/gen
+
 # Local configuration file (sdk path, etc)
 local.properties
 
 # Log Files
-*.log
+*.log 
+
+.settings
+.classpath
+coverage
+coverage.ec
+coverage.em
+javadoc
+junit-report.xml
+lint-results.*ml
+lint-results_files
+monkey.txt
+*~
+*.iws
+atlassian-ide-plugin.xml
+target
+out
+build.xml
+proguard-project.txt
