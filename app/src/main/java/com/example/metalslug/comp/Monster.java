@@ -3,6 +3,8 @@ package com.example.metalslug.comp;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
+import com.example.metalslug.GameView;
+import com.example.metalslug.ViewManager;
 import com.example.metalslug.game.Graphics;
 
 import java.util.ArrayList;
@@ -163,7 +165,7 @@ public class Monster {
     }
 
     // 定义发射子弹的方法
-    public void addBUllet() {
+    public void addBullet() {
         int bulletType = getBulletType();
         if (bulletType <= 0) {
             return;

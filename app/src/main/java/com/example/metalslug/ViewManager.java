@@ -51,7 +51,7 @@ public class ViewManager {
     // 保存第二种怪物（飞机）爆炸的动画帧的图片
     public static Bitmap[] flyDieImage = null;
     // 保存第三种怪物（人）的动画帧的图片
-    public static Bitmap[] manImgae = null;
+    public static Bitmap[] manImage = null;
     // 保存第三种怪物（人）的死亡时动画帧的图片
     public static Bitmap[] manDieImage = null;
     // 定义游戏对图片的缩放比例
@@ -60,33 +60,27 @@ public class ViewManager {
     public static int SCREEN_HEIGHT;
 
 
-
     // 获取屏幕初始宽度、高度的方法
-    public static void initScreen(int width, int height)
-    {
+    public static void initScreen(int width, int height) {
         SCREEN_WIDTH = (short) width;
         SCREEN_HEIGHT = (short) height;
     }
 
     // 清除屏幕的方法
-    public static void clearScreen(Canvas c, int color)
-    {
+    public static void clearScreen(Canvas c, int color) {
         color = 0xff000000 | color;
         c.drawColor(color);
     }
 
     // 清除屏幕的方法
-    public static void clearScreen(Canvas c)
-    {
+    public static void clearScreen(Canvas c) {
         c.drawColor(Color.BLACK);
     }
 
 
-
     // 加载所有游戏图片、声音的方法
-    public static void loadResource()
-    {
-        soundPool = new SoundPool(10, AudioManager.STREAM_SYSTEM , 5);
+    public static void loadResource() {
+        soundPool = new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);
         //	AudioAttributes attr = new AudioAttributes.Builder()
         //		.setUsage(AudioAttributes.USAGE_GAME)
         //		.setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
@@ -101,17 +95,13 @@ public class ViewManager {
         soundMap.put(3, soundPool.load(MainActivity.mainActivity, R.raw.oh, 1));
 
         Bitmap temp = createBitmapByID(MainActivity.res, R.drawable.map);
-        if (temp != null && !temp.isRecycled())
-        {
+        if (temp != null && !temp.isRecycled()) {
             int height = temp.getHeight();
-            if (height != SCREEN_HEIGHT && SCREEN_HEIGHT != 0)
-            {
+            if (height != SCREEN_HEIGHT && SCREEN_HEIGHT != 0) {
                 scale = (float) SCREEN_HEIGHT / (float) height;
                 map = Graphics.scale(temp, temp.getWidth() * scale, height * scale);
                 temp.recycle();
-            }
-            else
-            {
+            } else {
                 map = temp;
             }
         }
@@ -202,10 +192,10 @@ public class ViewManager {
         flyDieImage[8] = createBitmapByID(MainActivity.res, R.drawable.fly_die_9, scale);
         flyDieImage[9] = createBitmapByID(MainActivity.res, R.drawable.fly_die_10, scale);
         // 加载第三种怪物（人）活着时的动画帧的图片
-        manImgae = new Bitmap[3];
-        manImgae[0] = createBitmapByID(MainActivity.res, R.drawable.man_1, scale);
-        manImgae[1] = createBitmapByID(MainActivity.res, R.drawable.man_2, scale);
-        manImgae[2] = createBitmapByID(MainActivity.res, R.drawable.man_3, scale);
+        manImage = new Bitmap[3];
+        manImage[0] = createBitmapByID(MainActivity.res, R.drawable.man_1, scale);
+        manImage[1] = createBitmapByID(MainActivity.res, R.drawable.man_2, scale);
+        manImage[2] = createBitmapByID(MainActivity.res, R.drawable.man_3, scale);
         // 加载第三种怪物（人）死亡时的动画帧的图片
         manDieImage = new Bitmap[13];
         manDieImage[0] = createBitmapByID(MainActivity.res, R.drawable.man_die_1, scale);
@@ -216,74 +206,57 @@ public class ViewManager {
     }
 
 
-
     // 工具方法：根据图片id来获取实际的位图
-    private static Bitmap createBitmapByID(Resources res, int resID)
-    {
-        try
-        {
+    private static Bitmap createBitmapByID(Resources res, int resID) {
+        try {
             InputStream is = res.openRawResource(resID);
             return BitmapFactory.decodeStream(is, null, null);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return null;
         }
     }
+
     // 工具方法：根据图片id来获取实际的位图，并按scale进行缩放
-    private static Bitmap createBitmapByID(Resources res, int resID, float scale)
-    {
-        try
-        {
+    private static Bitmap createBitmapByID(Resources res, int resID, float scale) {
+        try {
             InputStream is = res.openRawResource(resID);
             Bitmap bitmap = BitmapFactory.decodeStream(is, null, null);
-            if (bitmap == null || bitmap.isRecycled())
-            {
+            if (bitmap == null || bitmap.isRecycled()) {
                 return null;
             }
-            if (scale <= 0 || scale == 1f)
-            {
+            if (scale <= 0 || scale == 1f) {
                 return bitmap;
             }
             int wdith = (int) (bitmap.getWidth() * scale);
             int height = (int) (bitmap.getHeight() * scale);
             Bitmap newBitmap = Graphics.scale(bitmap, wdith, height);
-            if (!bitmap.isRecycled() && !bitmap.equals(newBitmap))
-            {
+            if (!bitmap.isRecycled() && !bitmap.equals(newBitmap)) {
                 bitmap.recycle();
             }
             return newBitmap;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return null;
         }
     }
 
 
-
     // 绘制游戏界面的方法，该方法先绘制游戏背景地图，再绘制游戏角色，最后绘制所有怪物
-    public static void drawGame(Canvas canvas)
-    {
-        if (canvas == null)
-        {
+    public static void drawGame(Canvas canvas) {
+        if (canvas == null) {
             return;
         }
         // 画地图
-        if (map != null && !map.isRecycled())
-        {
+        if (map != null && !map.isRecycled()) {
             int width = map.getWidth() + GameView.player.getShift();
             // 绘制map图片，也就是绘制地图
             Graphics.drawImage(canvas, map, 0, 0, -GameView.player.getShift()
-                    , 0 ,width, map.getHeight());
+                    , 0, width, map.getHeight());
             int totalWidth = width;
             // 采用循环，保证地图前后可以拼接起来
-            while (totalWidth < ViewManager.SCREEN_WIDTH)
-            {
+            while (totalWidth < ViewManager.SCREEN_WIDTH) {
                 int mapWidth = map.getWidth();
                 int drawWidth = ViewManager.SCREEN_WIDTH - totalWidth;
-                if (mapWidth < drawWidth)
-                {
+                if (mapWidth < drawWidth) {
                     drawWidth = mapWidth;
                 }
                 Graphics.drawImage(canvas, map, totalWidth, 0, 0, 0,
@@ -299,15 +272,11 @@ public class ViewManager {
 
 
     // 工具方法：根据图片的文件名来获取实际的位图，
-    private static Bitmap createBitmapByFile(String pathName)
-    {
-        try
-        {
+    private static Bitmap createBitmapByFile(String pathName) {
+        try {
             InputStream fin = MainActivity.mainActivity.getAssets().open(pathName);
             return BitmapFactory.decodeStream(fin, null, null);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return null;
         }
     }

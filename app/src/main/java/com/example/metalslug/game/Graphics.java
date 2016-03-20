@@ -261,7 +261,7 @@ public class Graphics {
         }
     }
 
-    // 对原有位图执行镜像变换
+    // 对原有位图执行镜像变换(未用到，为后续做准备)
     public static Bitmap mirror(Bitmap img) {
         if (img == null || img.isRecycled()) {
             return null;

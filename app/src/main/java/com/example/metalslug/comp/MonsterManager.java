@@ -2,6 +2,9 @@ package com.example.metalslug.comp;
 
 import android.graphics.Canvas;
 
+import com.example.metalslug.GameView;
+import com.example.metalslug.ViewManager;
+
 import java.util.ArrayList;
 import java.util.List;
 

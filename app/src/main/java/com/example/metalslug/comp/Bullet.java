@@ -1,7 +1,8 @@
 package com.example.metalslug.comp;
 
 import android.graphics.Bitmap;
-import android.view.ViewManager;
+
+import com.example.metalslug.ViewManager;
 
 /**
  * Created by iceberg on 2016/3/18.

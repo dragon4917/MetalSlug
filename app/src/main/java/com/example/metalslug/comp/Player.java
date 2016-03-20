@@ -3,8 +3,9 @@ package com.example.metalslug.comp;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.view.ViewManager;
 
+
+import com.example.metalslug.ViewManager;
 import com.example.metalslug.game.Graphics;
 
 import java.net.MulticastSocket;
@@ -320,7 +321,7 @@ public class Player {
     public void move() {
         if (move == MOVE_RIGHT) {
             // 更新怪物的位置
-            MonsterManager.updatePostion((int) (ViewManager.scale * 6));
+            MonsterManager.updatePosistion((int) (ViewManager.scale * 6));
             // 更新角色的位置
             setX(getX() + (int) (ViewManager.scale * 6));
             if (!isJump()) {
